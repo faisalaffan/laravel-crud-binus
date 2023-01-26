@@ -16,5 +16,6 @@ Binus Tugas Auth With Vue Laravel
 
 ## Youtube Video
 
-[![Video Example](https://img.youtube.com/vi/nTQUwghvy5Q/default.jpg)](https://youtu.be/zsay8PPtwbQ)
+[![Video Example](https://img.youtube.com/vi/zsay8PPtwbQ/default.jpg)](https://youtu.be/zsay8PPtwbQ)
+
 
