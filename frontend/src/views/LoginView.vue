@@ -117,15 +117,17 @@ export default {
         return;
       }
       await Cookies.set("token", res.data.access_token);
+      await Cookies.set("userInfo", JSON.stringify(res.data.payload));
       Swal.alertSuccess(
         "Success Login",
         `Silahkan Masuk ${res?.data?.payload?.nama_lengkap}`
       );
-      setTimeout(() => {
-        return this.$router.push({
-          name: "about",
-        });
-      }, 1000);
+      console.log(res)
+      // setTimeout(() => {
+      //   return this.$router.push({
+      //     name: "about",
+      //   });
+      // }, 1000);
     },
     toRegister() {
       this.$router.push({
