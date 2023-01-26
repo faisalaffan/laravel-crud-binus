@@ -135,6 +135,7 @@ class ComposerStaticInit1c84cdfd800b8f71c16cb63604100d83
         'F' => 
         array (
             'Fruitcake\\Cors\\' => 15,
+            'Firebase\\JWT\\' => 13,
             'Faker\\' => 6,
         ),
         'E' => 
@@ -335,8 +336,8 @@ class ComposerStaticInit1c84cdfd800b8f71c16cb63604100d83
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -428,6 +429,10 @@ class ComposerStaticInit1c84cdfd800b8f71c16cb63604100d83
         array (
             0 => __DIR__ . '/..' . '/fruitcake/php-cors/src',
         ),
+        'Firebase\\JWT\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
+        ),
         'Faker\\' => 
         array (
             0 => __DIR__ . '/..' . '/fakerphp/faker/src/Faker',
@@ -506,6 +511,7 @@ class ComposerStaticInit1c84cdfd800b8f71c16cb63604100d83
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
@@ -517,6 +523,17 @@ class ComposerStaticInit1c84cdfd800b8f71c16cb63604100d83
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\ValidateSignature' => __DIR__ . '/../..' . '/app/Http/Middleware/ValidateSignature.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Http\\Modules\\Auth\\AuthRepository' => __DIR__ . '/../..' . '/app/Http/Modules/Auth/AuthRepository.php',
+        'App\\Http\\Modules\\Auth\\EloquentAuthRepository' => __DIR__ . '/../..' . '/app/Http/Modules/Auth/EloquentAuthRepository.php',
+        'App\\Http\\Utils\\Authorization' => __DIR__ . '/../..' . '/app/Http/Utils/Authorization.php',
+        'App\\Http\\Utils\\Backup' => __DIR__ . '/../..' . '/app/Http/Utils/Backup.php',
+        'App\\Http\\Utils\\Cache' => __DIR__ . '/../..' . '/app/Http/Utils/Cache.php',
+        'App\\Http\\Utils\\Connection' => __DIR__ . '/../..' . '/app/Http/Utils/Connection.php',
+        'App\\Http\\Utils\\Excel' => __DIR__ . '/../..' . '/app/Http/Utils/Excel.php',
+        'App\\Http\\Utils\\File' => __DIR__ . '/../..' . '/app/Http/Utils/File.php',
+        'App\\Http\\Utils\\Notifications' => __DIR__ . '/../..' . '/app/Http/Utils/Notifications.php',
+        'App\\Http\\Utils\\Payment' => __DIR__ . '/../..' . '/app/Http/Utils/Payment.php',
+        'App\\Http\\Utils\\Response' => __DIR__ . '/../..' . '/app/Http/Utils/Response.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
@@ -1347,6 +1364,13 @@ class ComposerStaticInit1c84cdfd800b8f71c16cb63604100d83
         'Faker\\Provider\\zh_TW\\Text' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/zh_TW/Text.php',
         'Faker\\UniqueGenerator' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/UniqueGenerator.php',
         'Faker\\ValidGenerator' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/ValidGenerator.php',
+        'Firebase\\JWT\\BeforeValidException' => __DIR__ . '/..' . '/firebase/php-jwt/src/BeforeValidException.php',
+        'Firebase\\JWT\\CachedKeySet' => __DIR__ . '/..' . '/firebase/php-jwt/src/CachedKeySet.php',
+        'Firebase\\JWT\\ExpiredException' => __DIR__ . '/..' . '/firebase/php-jwt/src/ExpiredException.php',
+        'Firebase\\JWT\\JWK' => __DIR__ . '/..' . '/firebase/php-jwt/src/JWK.php',
+        'Firebase\\JWT\\JWT' => __DIR__ . '/..' . '/firebase/php-jwt/src/JWT.php',
+        'Firebase\\JWT\\Key' => __DIR__ . '/..' . '/firebase/php-jwt/src/Key.php',
+        'Firebase\\JWT\\SignatureInvalidException' => __DIR__ . '/..' . '/firebase/php-jwt/src/SignatureInvalidException.php',
         'Fruitcake\\Cors\\CorsService' => __DIR__ . '/..' . '/fruitcake/php-cors/src/CorsService.php',
         'Fruitcake\\Cors\\Exceptions\\InvalidOptionException' => __DIR__ . '/..' . '/fruitcake/php-cors/src/Exceptions/InvalidOptionException.php',
         'GrahamCampbell\\ResultType\\Error' => __DIR__ . '/..' . '/graham-campbell/result-type/src/Error.php',

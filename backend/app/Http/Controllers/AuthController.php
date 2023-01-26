@@ -39,6 +39,39 @@ class AuthController extends Controller
         }
     }
 
+    public function register(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'nama_lengkap' => 'required|string',
+            'email' => 'required|string|email',
+            'password' => 'required|string|min:10',
+            'rbac' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->responseValidation('Error Saat Login', $validator->errors()->all());
+        } else {
+            // from eloquent auth repository
+            return $this->eloquentAuth->register($request);
+        }
+    }
+
+
+    public function resetpassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|string|email',
+            'password_new' => 'required|string|min:10',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->responseValidation('Error Saat Login', $validator->errors()->all());
+        } else {
+            // from eloquent auth repository
+            return $this->eloquentAuth->resetpassword($request);
+        }
+    }
+
     public function refreshToken(Request $request)
     {
         $validator = Validator::make($request->all(), [
