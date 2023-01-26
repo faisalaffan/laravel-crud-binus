@@ -122,12 +122,11 @@ export default {
         "Success Login",
         `Silahkan Masuk ${res?.data?.payload?.nama_lengkap}`
       );
-      console.log(res)
-      // setTimeout(() => {
-      //   return this.$router.push({
-      //     name: "about",
-      //   });
-      // }, 1000);
+      setTimeout(() => {
+        return this.$router.push({
+          name: "about",
+        });
+      }, 1000);
     },
     toRegister() {
       this.$router.push({
