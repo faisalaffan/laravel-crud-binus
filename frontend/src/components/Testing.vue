@@ -1,12 +1,9 @@
 <template>
-  <div>
-  </div>
+  <h1>TESTING</h1>
 </template>
 
 <script>
 export default {
-  name: "HomeView",
-  components: {
-  },
+  name: "TestingComponent",
 };
 </script>

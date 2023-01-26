@@ -66,7 +66,7 @@ const refreshToken = () => {
   }
 }
 
-const get = (url, withRefreshToken = true) => {
+const get = (url, withRefreshToken = false) => {
   const token = Cookies.get('token')
   // const token = process.env.HARDCODE_TOKEN
 
@@ -111,7 +111,7 @@ const get = (url, withRefreshToken = true) => {
     })
 }
 
-const post = (url, payload, withRefreshToken = true) => {
+const post = (url, payload, withRefreshToken = false) => {
   const token = Cookies.get('token')
   // const token = process.env.HARDCODE_TOKEN
 

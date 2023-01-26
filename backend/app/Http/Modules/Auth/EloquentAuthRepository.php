@@ -23,7 +23,7 @@ class EloquentAuthRepository implements AuthRepository
 
     public function login(Request $request)
     {
-        $data = User::where('email', $request->input('email'))->with(['connection', 'pegawai', 'pegawai.cabang'])->first();
+        $data = User::where('email', $request->input('email'))->first();
 
         // dd(json_decode($data));
 
@@ -34,45 +34,13 @@ class EloquentAuthRepository implements AuthRepository
         $matchPassword = $this->verifyBcyrptBetweenStringAndInputed($data['password'], $request->input('password'));
 
         if ($matchPassword) {
-            $data = [
-                "APIKey" => $data['connection']['APIKey'],
-                "db_connection" => [
-                    "host" => $data['connection']['host'],
-                    "port" => $data['connection']['port'],
-                    "database" => $data['connection']['database'],
-                    "username" => $data['connection']['username'],
-                    "password" => $data['connection']['password'],
-                ],
-                "rbac" => json_decode($data['rbac'], true),
-                "user_info" => [
-                    "id_user" => $data['id_user'],
-                    "nama_lengkap" => $data['nama_lengkap'],
-                    "email" => $data['email'],
-                    "created_at" => $data['created_at'],
-                    "updated_at" => $data['updated_at'],
-                ],
-                "pegawai_info" => $data['pegawai'] != null ? [
-                    "id" => $data['pegawai']['id'],
-                    "kodepegawai" => $data['pegawai']['kodepegawai'],
-                    "emailpegawai" => $data['pegawai']['emailpegawai'],
-                    "password" => $data['pegawai']['password'],
-                    "namapegawai" => $data['pegawai']['namapegawai'],
-                    "jabatanpegawai" => $data['pegawai']['jabatanpegawai'],
-                    "alamatpegawai" => $data['pegawai']['alamatpegawai'],
-                    "kotapegawai" => $data['pegawai']['kotapegawai'],
-                    "notelppegawai" => $data['pegawai']['notelppegawai'],
-                    "kode_cabang" => $data['pegawai']['kode_cabang'],
-                    "cabang" => $data['pegawai']['cabang'],
-                ] : null
-            ];
 
             // Convert Payload Data Diatas Menjadi Token JWT dari UTILS
             $res = $this->dataToJWTToken($data);
 
             return $res;
-
-            return null;
         }
+        return null;
     }
 
     public function refreshToken(Request $request)
@@ -103,39 +71,31 @@ class EloquentAuthRepository implements AuthRepository
         }
     }
 
-    public function getlistrole(Request $request)
+    public function resetpassword(Request $request)
     {
-        $data = Rbac::all();
+        $data = User::where('email', $request->input('email'))->update([
+            'password' => $this->stringToBcrypt($request->input('password_new'))
+        ]);
 
-        return $data;
-    }
 
-    public function getlistconnection(Request $request)
-    {
-        $data = Connection::all();
-
-        return $data;
-    }
-
-    public function getlistconnectiondetail(Request $request, $id)
-    {
-        $data = Connection::where('id_db_connection', $id)->first();
-
-        return $data;
+        return $this->responseData($request->toArray(), 'Berhasil Update');
     }
 
     public function register(Request $request)
     {
-        //     if (!Auth::attempt($request->only('email', 'password'))) {
-        //         return $this->response->response(401, true, 'Login Failed', null, 'Email or Password is wrong');
-        //     }
-        //     $data = User::where('email', $request->input('email'))->with('koperasi', 'role', 'koperasi.connection')->first();
-        $data = [
-            "nama" => "faisal",
-            "kelas" => "XII"
+        $payload = [
+            ...$request->all(),
+            'password' => $this->stringToBcrypt($request->input('password'))
         ];
-        $res = $this->dataToJWTToken($data);
 
-        return $res;
+        $data = User::insert([
+            'nama_lengkap' => $payload['nama_lengkap'],
+            'email' => $payload['email'],
+            'password' => $payload['password'],
+            'rbac' => $payload['rbac'],
+        ]);
+
+
+        return $this->responseData($request->toArray(), 'Berhasil Insert');
     }
 }
