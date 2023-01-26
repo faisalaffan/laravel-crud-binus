@@ -14,7 +14,6 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.auth)) {
     const isLoggedIn = Cookies.get("token");
-    console.log(isLoggedIn);
     if (typeof isLoggedIn == "undefined" || isLoggedIn == "") {
       next({
         path: "/login",
