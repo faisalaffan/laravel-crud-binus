@@ -4,17 +4,9 @@ namespace App\Http\Modules\Auth;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
-use App\Http\Controllers\ResponseApi;
-use Firebase\JWT\JWT;
-use Firebase\JWT\Key;
 use App\Http\Utils\Response;
 use App\Http\Utils\Authorization;
-use App\Models\Rbac;
-use Error;
-use App\Models\Connection;
+use Illuminate\Support\Facades\DB;
 
 class EloquentAuthRepository implements AuthRepository
 {
@@ -88,14 +80,19 @@ class EloquentAuthRepository implements AuthRepository
             'password' => $this->stringToBcrypt($request->input('password'))
         ];
 
-        $data = User::insert([
-            'nama_lengkap' => $payload['nama_lengkap'],
-            'email' => $payload['email'],
-            'password' => $payload['password'],
-            'rbac' => $payload['rbac'],
-        ]);
-
-
-        return $this->responseData($request->toArray(), 'Berhasil Insert');
+        DB::beginTransaction();
+        try {
+            $user = new User();
+            $user->nama_lengkap = $payload['nama_lengkap'];
+            $user->email = $payload['email'];
+            $user->password = $payload['password'];
+            $user->rbac = $payload['rbac'];
+            $user->save();
+            DB::commit();
+            return $this->responseData($user, "Berhasil Insert Data");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return $this->responseError("Berhasil Insert Data", 500, [$e->getMessage()]);
+        }
     }
 }

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Modules\Auth\EloquentAuthRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Modules\Auth\EloquentAuthRepository;
 use App\Http\Utils\Response;
 
 class AuthController extends Controller
@@ -52,7 +52,12 @@ class AuthController extends Controller
             return $this->responseValidation('Error Saat Login', $validator->errors()->all());
         } else {
             // from eloquent auth repository
-            return $this->eloquentAuth->register($request);
+            $data = $this->eloquentAuth->register($request);
+            if($data->getData()->success) {
+                return $this->responseData($request->toArray(), 'Berhasil Insert');
+            } else {
+                return $this->responseError('Gagal Insert', 500, $data->getData()->error);
+            }
         }
     }
 
